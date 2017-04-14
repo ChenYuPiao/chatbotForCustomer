@@ -13,12 +13,15 @@ session_start();
     if ($name && $passowrd){//如果用户名和密码都不为空
              $sql = "select * from user where user_name = '$name' and user_pwd='$passowrd'";//检测数据库是否有对应的username和password的sql
              $result = mysqli_query($con,$sql);//执行sql
-             $res = mysqli_fetch_assoc($result);
+
              $rows=mysqli_num_rows($result);//返回一个数值
 
              if($rows){//0 false 1 true
+                 $s = "select user_id from user where user_name = '$name'";
+                 $res=mysqli_query($con,$sql);
+                 $r=mysqli_fetch_array($result,MYSQLI_ASSOC);
                    $_SESSION['username']=$name;
-                    $_SESSION['uid']=$res['user_id'];
+                    $_SESSION['uid']=$r["user_id"];
                    header("refresh:0;url=../client/chat.php");//如果成功跳转至welcome.html页面
                    exit;
              }else{

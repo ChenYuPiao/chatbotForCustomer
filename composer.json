@@ -1,6 +1,6 @@
 {
-	"name": "fbzl/turing-robot",
-    "description": "A PHP SDK for www.tuling123.com",
+	"name": "chenyupiao/chatrobot",
+    "description": "use turing-robot to finish a chatbot for customer",
     "license": "MIT",
     "require": {
         "php": ">=5.4",
