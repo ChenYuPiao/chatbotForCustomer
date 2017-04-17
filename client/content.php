@@ -9,6 +9,11 @@ if (isset ($_POST["content"])) {
 $test = new TuringRobot('ac33d46c729d4e3ca483d52803d44ef3','35c5d730189f5459');
 $res=$test->say($content,$uid);
 
+/*switch($res.code){
+    case 100000:
+        
+}*/
+
 echo $res;
 
 

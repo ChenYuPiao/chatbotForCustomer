@@ -1,8 +1,8 @@
 body {
     padding: 0;
     margin: 0;
-    background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
-    background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
+    background: -moz-linear-gradient(-45deg, #0a1823 0, #0a1823 25%, #060e14 50%, #010305 75%, #010305 100%);
+    background: -webkit-linear-gradient(-45deg, #0a1823 0, #0a1823 25%, #060e14 50%, #010305 75%, #010305 100%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: "微软雅黑";
@@ -66,13 +66,13 @@ body {
     -webkit-animation: show-chat-odd 0.15s 1 ease-in;
     float: right;
     margin-right: 80px;
-    color: #0AD5C1;
+    color: white;
     margin: 0 80px 20px 0;
 }
 
 .right:before {
     right: -80px;
-    background-image: url(../image/user.jpg);
+    background-image: url(../image/user2.jpeg);
 }
 
 .right:after {
@@ -86,13 +86,13 @@ body {
     -webkit-animation: show-chat-even 0.15s 1 ease-in;
     float: left;
     margin-left: 80px;
-    color: #0EC879;
+    color: white;
     margin: 0 0 20px 80px;
 }
 
 .left:before {
     left: -80px;
-    background-image: url(../image/user.jpg);
+    background-image: url(../image/user1.jpeg);
 }
 
 .left:after {
@@ -110,7 +110,7 @@ body {
     height: 48px;
     font: 32px/48px;
     background: none;
-    color: #0AD5C1;
+    color: white;
     border: 0;
     border-bottom: 1px solid rgba(25, 147, 147, 0.2);
     outline: none;
@@ -155,13 +155,13 @@ body {
     float: left;
 }
 #userlist p{
-    color: #0EC879;
+    color: white;
     padding-bottom: 15px;
     z-index: 8;
     cursor: default;
 }
 #userlist h1{
-    color: #0AD5C1;
+    color: white;
 }
 #userlist div{
     margin-right: 20px;

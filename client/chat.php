@@ -1,11 +1,10 @@
-/****
-**@author chenyupiao
-**@blog http://chenyupiao.com
-**@email onlycyp@163.com
-**@version chatbotforcudtomer 0.1v
-****/
 <?php
-
+/**
+ ** @author chenyupiao
+ ** @blog http://chenyupiao.com
+ ** @email onlycyp@163.com
+ ** @version chatbotforcudtomer 0.1v
+ */
 session_start();
 require '../vendor/autoload.php';
 require 'turingRobot.class.php';
@@ -55,14 +54,42 @@ include('../db/conn.php');
                 $.post("content.php",{"content": content},function (data) {
                     if(data){
                         res=data;
-                        //alert(res.text+res.code);
-                        
                         var chatbotres = '';
-                        //$.each(res, function (key, val) {
-                            chatbotres += "<li class='left'>" + "小图" + "：" + res.text + "</li>";
+                        //alert(res.text+res.code);
+                        switch (res.code){
+                            case 100000:
+                                chatbotres += "<li class='left'>" + "小图" + "：" + res.text + "</li>";
+                                $.post("ajax.php", {content: content,anwser:res.text});
+                                $("#chatshow").append(chatbotres);
+                                break;
+                            case 200000:
+                                chatbotres += "<li class='left'>" + "小图" + "：" + res.text + ":" + "<a href=\" " + res.url + "\" target='_blank'>" +"打开页面" + "</a>"+"</li>";
+                                $.post("ajax.php", {content: content,anwser:res.text+res.url});
+                                $("#chatshow").append(chatbotres);
+                                break;
+                            case 302000:
+                                chatbotres += "<li class='left'>" + "小图" +  "<a href= \" " + res.list[0]['detailurl'] + "\" target='_blank'>" + ":" + res.list[0]['article'] + "</a>" + "</li>";
+                                $("#chatshow").append(chatbotres);
+                                $.post("ajax.php", {content: content,anwser:res.list[0]['article']+res.list[0]['detailurl']});
+                                chatbotres += "<li class='left'>" + "小图" +  "<a href=\"" + res.list[1]['detailurl'] + "\" target='_blank'>" + ":" + res.list[1]['article'] + "</a>" + "</li>";
+                                $("#chatshow").append(chatbotres);
+                                $.post("ajax.php", {content: content,anwser:res.list[1]['article']+res.list[1]['detailurl']});
+                                break;
+                            case 308000:
+                                chatbotres += "<li class='left'>" + "小图" +  "<a href=\"" + res.list[0]['detailurl'] + "\" target='_blank'>" + ":" + res.list[0]['name'] + "-" + res.list[0]['info'] + "</a>" + "</li>";
+                                $("#chatshow").append(chatbotres);
+                                $.post("ajax.php", {content: content,anwser:res.list[0]['name']+res.list[0]['info']+res.list[0]['detailurl']});
+                                break;
+
+
+
+                        }
+
+
+                            /*chatbotres += "<li class='left'>" + "小图" + "：" + res.text + "</li>";
                             $.post("ajax.php", {content: content,anwser:res.text});
-                        //})
-                        $("#chatshow").append(chatbotres);
+
+                        $("#chatshow").append(chatbotres);*/
                         bottom();
                     }
 
@@ -90,7 +117,7 @@ include('../db/conn.php');
 </head>
 <body>
    <div class="container main">
-       <div class="page-header">
+       <div class="page-header" style="color: white">
         <h1>A Chatbot For Customer</h1>
        </div>
         <div id="userlist">
@@ -106,6 +133,9 @@ include('../db/conn.php');
         <ul class="chat-thread" id="chatshow">
             <li class=left>小图：你好啊，请问有什么需要帮助的嘛</li>
         </ul>
+        <!--<div class="chat-thread" id="chatnews">
+
+        </div>-->
         <div style="margin-top: 20px;">
             <textarea name="content" id="content"></textarea>
         </div>
