@@ -72,7 +72,7 @@ body {
 
 .right:before {
     right: -80px;
-    background-image: url(../image/user2.jpeg);
+    background-image: url(../image/user2.png);
 }
 
 .right:after {
@@ -92,7 +92,7 @@ body {
 
 .left:before {
     left: -80px;
-    background-image: url(../image/user1.jpeg);
+    background-image: url(../image/user1.png);
 }
 
 .left:after {

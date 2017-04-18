@@ -46,4 +46,3 @@ session_start();
     }
 
     mysqli_close($con);//关闭数据库
-?>
