@@ -14,4 +14,5 @@
     
     mysqli_select_db($con,"chating");//选择数据库（我的是test）
 
+
 ?>  

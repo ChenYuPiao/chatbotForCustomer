@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap-Table</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<body>
+<div>
+    <div>
+        <div class="page-header" style="color: #0f0f0f">
+            <h1>Chatbot Manager</h1>
+        </div>
+        <div class="col-*-12">
+
+            <div id="toolbar">
+                <!--<div class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加记录</div>-->
+            </div>
+
+            <table id="mytab" class="table table-hover"></table>
+
+            <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" action="javascript:void(0)">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="age" placeholder="请输入年龄">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="addRecord">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="../lib/bootstrap-table-develop/dist/bootstrap-table.js"></script>
+<script src="../lib/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript">
+    $(function() {
+        //根据窗口调整表格高度
+        /*$(window).resize(function() {
+            $('#mytab').bootstrapTable('resetView', {
+                height: tableHeight()
+            })
+        })*/
+
+        $('#mytab').bootstrapTable({
+            showHeader: true,
+            url: "data.php",//数据源
+            dataField: "rows",//服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
+            search: true,//是否搜索
+            pagination: true,//是否分页
+            pageSize: 20,//单页记录数
+            pageList: [5, 10, 20, 50],//分页步进值
+            sidePagination: "server",//服务端分页
+            contentType: "application/x-www-form-urlencoded",//请求数据内容格式 默认是 application/json 自己根据格式自行服务端处理
+            dataType: "json",//期待返回数据类型
+            method: "post",//请求方式
+            searchAlign: "left",//查询框对齐方式
+            iconsPrefix: 'glyphicon', // glyphicon of fa (font awesome)
+            icons: {
+                paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
+                paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
+                refresh: 'glyphicon-refresh icon-refresh',
+                toggle: 'glyphicon-list-alt icon-list-alt',
+                columns: 'glyphicon-th icon-th',
+                detailOpen: 'glyphicon-plus icon-plus',
+                detailClose: 'glyphicon-minus icon-minus'
+            },
+            queryParamsType: "limit",//查询参数组织方式
+            queryParams: function getParams(params) {
+                //params obj
+                params.other = "otherInfo";
+                return params;
+            },
+            searchOnEnterKey: false,//回车搜索
+            showRefresh: true,//刷新按钮
+            showColumns: true,//列选择按钮
+            sortable: true,
+            buttonsAlign: "left",//按钮对齐方式
+            toolbar: "#toolbar",//指定工具栏
+            toolbarAlign: "right",//工具栏对齐方式
+            columns: [
+                {
+                    title: "全选",
+                    field: "select",
+                    checkbox: true,
+                    width: 20,//宽度
+                    align: "center",//水平
+                    valign: "middle"//垂直
+                },
+                {
+                    title: "ID",//标题
+                    field: "uid",//键名
+                    sortable: true,//是否可排序
+                    order: "desc"//默认排序方式
+                },
+                {
+                    field: "uname",
+                    title: "NAME",
+                    sortable: true,
+                    titleTooltip: "this is name"
+                },
+                {
+                    field: "content",
+                    title: "Question",
+                    sortable: true,
+                },
+                {
+                    field: "anwser",
+                    title: "Anwser",
+                    //formatter: 'infoFormatter',//对本列数据做格式化
+                }
+            ],
+            onClickRow: function(row, $element) {
+                //$element是当前tr的jquery对象
+                $element.css("background-color", "green");
+            },//单击row事件
+            locale: "zh-CN",//中文支持,
+            detailView: false, //是否显示详情折叠
+            detailFormatter:function(index, row, element) {
+            var html = '';
+            $.each(row, function(key, val){
+                html += "<p>" + key + ":" + val +  "</p>"
+            });
+            return html;
+        }
+    });
+
+        $("#addRecord").click(function(){
+            alert("name:" + $("#name").val() + " age:" +$("#age").val());
+        });
+    })
+
+    function tableHeight() {
+        return $(window).height() - 50;
+    }
+    /**
+     * 列的格式化函数 在数据从服务端返回装载前进行处理
+     * @param  {[type]} value [description]
+     * @param  {[type]} row   [description]
+     * @param  {[type]} index [description]
+     * @return {[type]}       [description]
+     */
+    function infoFormatter(value, row, index)
+    {
+        return "id:" + row.id + " name:" + row.name + " age:" + row.age;
+    }
+</script>
+</body>
+</html>

@@ -26,7 +26,7 @@ session_start();
 if (isset($_POST['content'])&&($_POST['anwser'])) {
     $content = $_POST['content'];
     $anwser = $_POST['anwser'];
-    $sql = "INSERT INTO record (content,uid,anwser) VALUES ('{$content}','{$_SESSION['uid']}','{$anwser}');";
+    $sql = "INSERT INTO record (content,uid,uname,anwser) VALUES ('{$content}','{$_SESSION['uid']}','{$_SESSION['username']}','{$anwser}');";
     $res = mysqli_query($con, $sql);
 }
 

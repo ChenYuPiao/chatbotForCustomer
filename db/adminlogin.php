@@ -22,7 +22,7 @@ if ($name && $passowrd){//如果用户名和密码都不为空
         $r=mysqli_fetch_array($result,MYSQLI_ASSOC);
         $_SESSION['username']=$name;
         $_SESSION['uid']=$r["user_id"];
-        header("refresh:0;url=../admin/admin.php");//如果成功跳转至welcome.html页面
+        header("refresh:0;url=../admin/admin.html");//如果成功跳转至welcome.html页面
         exit;
     }else{
         echo "用户名或密码错误";

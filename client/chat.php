@@ -58,25 +58,25 @@ include('../db/conn.php');
                         //alert(res.text+res.code);
                         switch (res.code){
                             case 100000:
-                                chatbotres += "<li class='left'>" + "小图" + "：" + res.text + "</li>";
+                                chatbotres += "<li class='left'>" + "Miumiu" + "：" + res.text + "</li>";
                                 $.post("ajax.php", {content: content,anwser:res.text});
                                 $("#chatshow").append(chatbotres);
                                 break;
                             case 200000:
-                                chatbotres += "<li class='left'>" + "小图" + "：" + res.text + ":" + "<a href=\" " + res.url + "\" target='_blank'>" +"打开页面" + "</a>"+"</li>";
+                                chatbotres += "<li class='left'>" + "Miumiu" + "：" + res.text + ":" + "<a href=\" " + res.url + "\" target='_blank'>" +"打开页面" + "</a>"+"</li>";
                                 $.post("ajax.php", {content: content,anwser:res.text+res.url});
                                 $("#chatshow").append(chatbotres);
                                 break;
                             case 302000:
-                                chatbotres += "<li class='left'>" + "小图" +  "<a href= \" " + res.list[0]['detailurl'] + "\" target='_blank'>" + ":" + res.list[0]['article'] + "</a>" + "</li>";
+                                chatbotres += "<li class='left'>" + "Miumiu" +  "<a href= \" " + res.list[0]['detailurl'] + "\" target='_blank'>" + ":" + res.list[0]['article'] + "</a>" + "</li>";
                                 $("#chatshow").append(chatbotres);
                                 $.post("ajax.php", {content: content,anwser:res.list[0]['article']+res.list[0]['detailurl']});
-                                chatbotres += "<li class='left'>" + "小图" +  "<a href=\"" + res.list[1]['detailurl'] + "\" target='_blank'>" + ":" + res.list[1]['article'] + "</a>" + "</li>";
+                                chatbotres += "<li class='left'>" + "Miumiu" +  "<a href=\"" + res.list[1]['detailurl'] + "\" target='_blank'>" + ":" + res.list[1]['article'] + "</a>" + "</li>";
                                 $("#chatshow").append(chatbotres);
                                 $.post("ajax.php", {content: content,anwser:res.list[1]['article']+res.list[1]['detailurl']});
                                 break;
                             case 308000:
-                                chatbotres += "<li class='left'>" + "小图" +  "<a href=\"" + res.list[0]['detailurl'] + "\" target='_blank'>" + ":" + res.list[0]['name'] + "-" + res.list[0]['info'] + "</a>" + "</li>";
+                                chatbotres += "<li class='left'>" + "Miumiu" +  "<a href=\"" + res.list[0]['detailurl'] + "\" target='_blank'>" + ":" + res.list[0]['name'] + "-" + res.list[0]['info'] + "</a>" + "</li>";
                                 $("#chatshow").append(chatbotres);
                                 $.post("ajax.php", {content: content,anwser:res.list[0]['name']+res.list[0]['info']+res.list[0]['detailurl']});
                                 break;
@@ -131,7 +131,7 @@ include('../db/conn.php');
     <div class="message">
         <span class="close""></span>
         <ul class="chat-thread" id="chatshow">
-            <li class=left>小图：你好啊，请问有什么需要帮助的嘛</li>
+            <li class=left>Miumiu：你好啊，请问有什么需要帮助的嘛</li>
         </ul>
         <!--<div class="chat-thread" id="chatnews">
 
